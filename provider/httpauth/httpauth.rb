@@ -20,11 +20,18 @@ Puppet::Type.type(:httpauth).provide(:httpauth) do
     def exists?
         if File.exists?(resource[:file])
             mech(resource[:file])
-            @htauth.get_passwd(resource[:realm], resource[:name], false)
+            
+            cp = @htauth.get_passwd(resource[:realm], resource[:name], false)
+           
+            if cp == make_passwd(resource[:realm], resource[:name], resource[:password])
+                return true
+            else
+                return false
+            end
         else
             File.new(resource[:file], "w")
             mech(resource[:file])
-            false
+            return false
         end
     end
 
@@ -33,6 +40,14 @@ Puppet::Type.type(:httpauth).provide(:httpauth) do
             @htauth = WEBrick::HTTPAuth::Htdigest.new(file)
         elsif resource[:mechanism] == :basic
             @htauth = WEBrick::HTTPAuth::Htpasswd.new(file)
+        end
+    end
+
+    def make_passwd(realm, user, password)
+        if resource[:mechanism] == :digest
+            WEBrick::HTTPAuth::DigestAuth.make_passwd(realm, user, password)
+        elsif resource[:mechanism] == :basic
+            WEBrick::HTTPAuth::BasicAuth.make_passwd(realm, user, password)
         end
     end
 end

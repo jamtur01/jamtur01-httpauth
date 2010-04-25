@@ -21,19 +21,25 @@ Puppet::Type.newtype(:httpauth) do
 
     newparam(:password) do
        desc "The password in plaintext."
+    
     end
 
     newparam(:realm) do
        desc "The realm - defaults to nil and mainly used for Digest authentication."
 
        defaultto "nil"
-   end
+    end
     
-   newparam(:mechanism) do
+    newparam(:mechanism) do
        desc "The authentication mechanism to use - either basic or digest. Default to basic."
        
        newvalues(:basic, :digest)
       
        defaultto :basic
     end
+
+    validate do
+       raise Puppet::Error, "You must specify a password for the user." unless @parameters.include?(:password)
+    end
+
 end
