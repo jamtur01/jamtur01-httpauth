@@ -48,6 +48,7 @@ Puppet::Type.newtype(:httpauth) do
        defaultto :basic
     end
 
+    # Ensure a password is always specified
     validate do
        raise Puppet::Error, "You must specify a password for the user." unless @parameters.include?(:password)
     end
