@@ -27,7 +27,7 @@ Puppet::Type.type(:httpauth).provide(:httpauth) do
 
             # Check if the user exists in the file
             cp = @htauth.get_passwd(resource[:realm], resource[:name], false)
-
+            return false if cp == nil
             # Check if the current password matches the proposed password
             return check_passwd(resource[:realm], resource[:name], resource[:password], cp)
         else
