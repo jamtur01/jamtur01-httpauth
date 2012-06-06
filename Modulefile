@@ -1,0 +1,5 @@
+name 'puppet-httpauth'
+version '0.0.2'
+license 'Apache 2.0'
+summary 'Puppet type for managing HTTP Basic and Digest auth files, a la htpasswd.'
+project_page 'https://github.com/jamtur01/puppet-httpauth'
