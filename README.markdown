@@ -7,6 +7,8 @@ Copyright - James Turnbull <james@lovedthanlost.net>
 
 License: GPLv3
 
+Thanks to John Ferlito and JKur (https://github.com/jkur) for patches.
+
 Requirements
 ------------
 
