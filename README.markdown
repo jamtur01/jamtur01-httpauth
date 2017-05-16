@@ -5,7 +5,7 @@ This provides a HTTP Authentication type for Puppet that support Basic and Diges
 
 Copyright - James Turnbull <james@lovedthanlost.net>
 
-License: GPLv3
+License: Apache 2.0
 
 Thanks to John Ferlito and JKur (https://github.com/jkur) for patches.
 
