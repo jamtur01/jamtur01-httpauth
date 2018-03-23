@@ -17,7 +17,8 @@ Requirements
 Usage
 -----
 
-    httpauth { 'user':
+    httpauth { 'name':
+      username => 'username',
       file     => '/path/to/password/file',
       password => 'password',
       realm => 'realm',

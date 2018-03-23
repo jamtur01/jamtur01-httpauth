@@ -1,6 +1,7 @@
 Puppet::Type.newtype(:httpauth) do
     @doc = "Manage HTTP Basic or Digest password files." +
-           "    httpauth { 'user':                     " +
+           "    httpauth { 'name':                     " +
+           "      username => user                     " +
            "      file => '/path/to/password/file',    " +
            "      password => 'password',              " +
            "      mechanism => basic,                  " +
@@ -19,7 +20,7 @@ Puppet::Type.newtype(:httpauth) do
        defaultto :present
     end
 
-    newparam(:name) do
+    newparam(:username) do
        desc "The name of the user to be managed."
 
        isnamevar
