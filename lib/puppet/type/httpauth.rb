@@ -20,10 +20,16 @@ Puppet::Type.newtype(:httpauth) do
        defaultto :present
     end
 
-    newparam(:username) do
+    newparam(:name) do
        desc "The name of the user to be managed."
 
        isnamevar
+    end 
+
+    newparam(:username) do
+       desc "The name of the user to be managed."
+
+       defaultto :name
     end 
 
     newparam(:file) do
