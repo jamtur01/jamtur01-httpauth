@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Puppet::Type.type(:httpauth) do
     it "should default to being present" do
-        user = Puppet::Type.type(:httpauth).new(:name => "alice", :password => "password")
+        user = Puppet::Type.type(:httpauth).new(:username => "alice", :password => "password")
         user.should(:ensure).should == :present
     end
 end
@@ -28,19 +28,19 @@ describe Puppet::Type.type(:httpauth), "when validating attribute values" do
     end
 
     it "should support :present as a value to :ensure" do
-        Puppet::Type.type(:httpauth).new(:name => "alice", :ensure => :present, :password => "password")
+        Puppet::Type.type(:httpauth).new(:username => "alice", :ensure => :present, :password => "password")
     end
 
     it "should support :absent as a value to :ensure" do
-        Puppet::Type.type(:httpauth).new(:name => "alice", :ensure => :absent, :password => "password")
+        Puppet::Type.type(:httpauth).new(:username => "alice", :ensure => :absent, :password => "password")
     end
 
     it "should support :basic as a value to :mechanism" do
-        Puppet::Type.type(:httpauth).new(:name => "alice", :mechanism => :basic, :password => "password")
+        Puppet::Type.type(:httpauth).new(:username => "alice", :mechanism => :basic, :password => "password")
     end
 
     it "should support :digest as a value to :mechanism" do
-        Puppet::Type.type(:httpauth).new(:name => "alice", :mechanism => :digest, :password => "password")
+        Puppet::Type.type(:httpauth).new(:username => "alice", :mechanism => :digest, :password => "password")
     end 
 end
 
@@ -55,7 +55,7 @@ describe Puppet::Type.type(:httpauth) do
         @provider = stub 'provider', :class => Puppet::Type.type(:httpauth).defaultprovider, :clear => nil, :satisfies? => true, :name => :mock
         Puppet::Type.type(:httpauth).defaultprovider.stubs(:new).returns(@provider)
         Puppet::Type.type(:httpauth).defaultprovider.stubs(:instances).returns([])
-        @httpauth = Puppet::Type.type(:httpauth).new(:name => "alice", :password => "password")
+        @httpauth = Puppet::Type.type(:httpauth).new(:username => "alice", :password => "password")
 
         @catalog = Puppet::Resource::Catalog.new
         @catalog.add_resource(@httpauth)
