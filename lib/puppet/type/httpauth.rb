@@ -29,7 +29,7 @@ Puppet::Type.newtype(:httpauth) do
     newparam(:username) do
        desc "The name of the user to be managed."
 
-       defaultto :name
+       defaultto { @resource[:name] }
     end 
 
     newparam(:file) do
