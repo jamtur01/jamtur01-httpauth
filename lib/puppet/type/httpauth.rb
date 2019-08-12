@@ -60,4 +60,28 @@ Puppet::Type.newtype(:httpauth) do
        raise Puppet::Error, "You must specify a password for the user." unless @parameters.include?(:password)
     end
 
+    newparam(:owner) do
+      desc "The owner of the file"
+    end
+
+    newparam(:group) do
+      desc "The group owner of the file"
+    end
+
+    newparam(:mode) do
+      desc "The file mode. Default to 0600"
+      defaultto '0600'
+    end
+
+    def generate
+      file_opts = {
+        ensure: :file
+      }
+      file_opts[:name] = self[:file]
+      file_opts[:owner] = self[:owner] unless self[:owner].nil?
+      file_opts[:group] = self[:group] unless self[:group].nil?
+      file_opts[:mode] = self[:mode] unless self[:mode].nil?
+      file_opts[:require] = "Httpauth[#{self[:name]}]"
+      [Puppet::Type.type(:file).new(file_opts)]
+    end
 end
