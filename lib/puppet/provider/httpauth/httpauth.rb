@@ -21,7 +21,10 @@ Puppet::Type.type(:httpauth).provide(:httpauth) do
  
     def exists?
         # Check if the file exists at all
-        if File.exists?(resource[:file])
+        if File.exist?(resource[:file])
+            # Set file mode to given value
+            File.chmod(resource[:mode], resource[:file])
+
             # If it does exist open the file
             mech(resource[:file])
 
@@ -32,7 +35,7 @@ Puppet::Type.type(:httpauth).provide(:httpauth) do
             return check_passwd(resource[:realm], resource[:username], resource[:password], cp)
         else
             # If the file doesn't exist then create it
-            File.new(resource[:file], "w")
+            File.new(resource[:file], "w", resource[:mode])
             mech(resource[:file])
             return false
         end

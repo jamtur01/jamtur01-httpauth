@@ -20,6 +20,7 @@ Usage
     httpauth { 'name':
       username => 'username',
       file     => '/path/to/password/file',
+      mode     => 0644,
       password => 'password',
       realm => 'realm',
       mechanism => basic,
