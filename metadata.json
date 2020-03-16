@@ -1,7 +1,7 @@
 {
   "name": "jamtur01-httpauth",
-  "version": "0.0.5",
-  "author": "puppet",
+  "version": "0.0.6",
+  "author": "jamtur01",
   "summary": "Puppet type for managing HTTP Basic and Digest auth files, a la htpasswd.",
   "license": "Apache 2.0",
   "source": "https://github.com/jamtur01/jamtur01-httpauth",
